@@ -76,8 +76,8 @@ services:
     ports:
       - 8082:8080
     environment:
-      MONGO_DB_HOST: mongo-movies
-      MONGO_DB_PORT: 27017
+      MONGODB_HOST: mongo-movies
+      MONGODB_PORT: 27017
     networks:
       - default
 
@@ -88,8 +88,8 @@ services:
     ports:
       - 8083:8080
     environment:
-      MONGO_DB_HOST: mongo-cinemas
-      MONGO_DB_PORT: 27017
+      MONGODB_HOST: mongo-cinemas
+      MONGODB_PORT: 27017
     networks:
       - default
 
