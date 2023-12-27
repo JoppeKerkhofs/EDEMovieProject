@@ -18,4 +18,5 @@ public class Movie {
     private String description;
     private String releaseDate;
     private List<Long> actors;
+    private int ratingId;
 }

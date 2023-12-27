@@ -37,6 +37,7 @@ public class MovieController {
             .description(movie.getDescription())
             .releaseDate(movie.getReleaseDate())
             .actors(movie.getActors())
+            .ratingId(movie.getRatingId())
             .build();
         movieRepository.save(newMovie);
     }

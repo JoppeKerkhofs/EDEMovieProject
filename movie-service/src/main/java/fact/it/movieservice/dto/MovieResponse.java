@@ -15,4 +15,5 @@ public class MovieResponse {
     private String description;
     private String releaseDate;
     private String actors;
+    private int ratingId;
 }

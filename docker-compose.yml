@@ -60,7 +60,7 @@ services:
       - mysql-ratings
     image: j0ppek/rating-service:latest
     ports:
-      - 8081:8080
+      - 8081:8081
     environment:
       MYSQL_DB_USERNAME: root
       MYSQL_DB_PASSWORD: abc123
@@ -108,10 +108,10 @@ services:
       - movie-service
       - cinema-service
     environment:
-      ACTOR_SERVICE_BASEURL: localhost:8080
-      RATING_SERVICE_BASEURL: localhost:8081
-      MOVIE_SERVICE_BASEURL: localhost:8082
-      CINEMA_SERVICE_BASEURL: localhost:8083
+      ACTOR_SERVICE_BASEURL: actor-service:8080
+      RATING_SERVICE_BASEURL: rating-service:8081
+      MOVIE_SERVICE_BASEURL: movie-service:8080
+      CINEMA_SERVICE_BASEURL: cinema-service:8080
     networks:
       - default
 

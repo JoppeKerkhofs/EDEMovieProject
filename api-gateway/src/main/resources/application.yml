@@ -22,33 +22,33 @@ spring:
           issuer-uri: https://accounts.google.com
           jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
   cloud:
-  gateway:
-    routes:
-      - id: actor-service
-        uri: http://${ACTOR_SERVICE_BASEURL:localhost:8080}
-        predicates:
-          - Path=/actors
-          - Method=GET
-        filters:
-          - SetPath=/api/actors
-      - id: cinema-service
-        uri: http://${CINEMA_SERVICE_BASEURL:localhost:8080}
-        predicates:
-          - Path=/cinemas
-          - Method=GET
-        filters:
-          - SetPath=/api/cinemas
-      - id: movie-service
-        uri: http://${MOVIE_SERVICE_BASEURL:localhost:8080}
-        predicates:
-          - Path=/movies
-          - Method=GET
-        filters:
-          - SetPath=/api/movies
-      - id: rating-service
-        uri: http://${RATING_SERVICE_BASEURL:localhost:8081}
-        predicates:
-          - Path=/ratings
-          - Method=GET
-        filters:
-          - SetPath=/api/ratings
+    gateway:
+      routes:
+        - id: actor-service
+          uri: http://${ACTOR_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/actors
+            - Method=GET
+          filters:
+            - SetPath=/api/actors
+        - id: cinema-service
+          uri: http://${CINEMA_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/cinemas
+            - Method=GET
+          filters:
+            - SetPath=/api/cinemas
+        - id: movie-service
+          uri: http://${MOVIE_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/movies
+            - Method=GET
+          filters:
+            - SetPath=/api/movies
+        - id: rating-service
+          uri: http://${RATING_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/ratings
+            - Method=GET
+          filters:
+            - SetPath=/api/ratings

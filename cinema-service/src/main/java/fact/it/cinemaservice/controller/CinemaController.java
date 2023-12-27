@@ -11,7 +11,7 @@ import fact.it.cinemaservice.service.CinemaService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/cinema")
+@RequestMapping("/api/cinemas")
 @RequiredArgsConstructor
 public class CinemaController {
     private final CinemaService cinemaService;
