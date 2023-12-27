@@ -1,0 +1,104 @@
+version: "3.9"
+
+services:
+  mongo-cinemas:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_cinema_data:/data/db
+    networks:
+      - default
+
+  mongo-movies:
+    image: mongo:latest
+    ports:
+      - 27018:27017
+    volumes:
+      - mongodb_movies_data:/data/db
+    networks:
+      - default
+  
+  mysql-actors:
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: abc123
+    volumes:
+      - mysql_actors_data:/var/lib/mysql
+    networks:
+      - default
+
+  mysql-ratings:
+    image: mysql:latest
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: abc123
+    volumes:
+      - mysql_ratings_data:/var/lib/mysql
+    networks:
+      - default
+
+  actor-service:
+    depends_on:
+      - mysql-actors
+    image: j0ppek/actor-service:latest
+    ports:
+      - 8080:8080
+    environment:
+      MYSQL_DB_USERNAME: root
+      MYSQL_DB_PASSWORD: abc123
+      MYSQL_DB_HOST: mysql-actors
+      MYSQL_DB_PORT: 3306
+    networks:
+      - default
+
+  rating-service:
+    depends_on:
+      - mysql-ratings
+    image: j0ppek/rating-service:latest
+    ports:
+      - 8081:8080
+    environment:
+      MYSQL_DB_USERNAME: root
+      MYSQL_DB_PASSWORD: abc123
+      MYSQL_DB_HOST: mysql-ratings
+      MYSQL_DB_PORT: 3306
+    networks:
+      - default
+
+  movie-service:
+    depends_on:
+      - mongo-movies
+    image: j0ppek/movie-service:latest
+    ports:
+      - 8082:8080
+    environment:
+      MONGO_DB_HOST: mongo-movies
+      MONGO_DB_PORT: 27017
+    networks:
+      - default
+
+  cinema-service:
+    depends_on:
+      - mongo-cinemas
+    image: j0ppek/cinema-service:latest
+    ports:
+      - 8083:8080
+    environment:
+      MONGO_DB_HOST: mongo-cinemas
+      MONGO_DB_PORT: 27017
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
+
+volumes:
+  mongodb_cinema_data:
+  mongodb_movies_data:
+  mysql_actors_data:
+  mysql_ratings_data:
