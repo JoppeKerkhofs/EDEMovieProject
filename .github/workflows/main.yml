@@ -25,13 +25,13 @@ jobs:
         run: mvn package -DskipTests
 
       - name: Docker login
-        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_TOKEN }}
+        run: docker login -u ${{ secrets.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Docker Build
-        run: docker build -t ${{ secrets.DOCKER_USER }}/actor-service:latest ./actor-service
+        run: docker build -t ${{ secrets.DOCKERHUB_USER }}/actor-service:latest ./actor-service
 
       - name: Upload container to Docker Hub with Push
-        run: docker push ${{ secrets.DOCKER_USER }}/actor-service:latest
+        run: docker push ${{ secrets.DOCKERHUB_USER }}/actor-service:latest
   cinemaservice:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver cinema-service container
@@ -51,13 +51,13 @@ jobs:
         run: mvn package -DskipTests
 
       - name: Docker login
-        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_TOKEN }}
+        run: docker login -u ${{ secrets.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Docker Build
-        run: docker build -t ${{ secrets.DOCKER_USER }}/cinema-service:latest ./cinema-service
+        run: docker build -t ${{ secrets.DOCKERHUB_USER }}/cinema-service:latest ./cinema-service
 
       - name: Upload container to Docker Hub with Push
-        run: docker push ${{ secrets.DOCKER_USER }}/cinema-service:latest
+        run: docker push ${{ secrets.DOCKERHUB_USER }}/cinema-service:latest
   movieservice:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver movie-service container
@@ -77,13 +77,13 @@ jobs:
         run: mvn package -DskipTests
         
       - name: Docker login
-        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_TOKEN }}
+        run: docker login -u ${{ secrets.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Docker Build
-        run: docker build -t ${{ secrets.DOCKER_USER }}/movie-service:latest ./movie-service
+        run: docker build -t ${{ secrets.DOCKERHUB_USER }}/movie-service:latest ./movie-service
 
       - name: Upload container to Docker Hub with Push
-        run: docker push ${{ secrets.DOCKER_USER }}/movie-service:latest
+        run: docker push ${{ secrets.DOCKERHUB_USER }}/movie-service:latest
   ratingservice:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver rating-service container
@@ -103,10 +103,10 @@ jobs:
         run: mvn package -DskipTests
         
       - name: Docker login
-        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_TOKEN }}
+        run: docker login -u ${{ secrets.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Docker Build
-        run: docker build -t ${{ secrets.DOCKER_USER }}/rating-service:latest ./rating-service
+        run: docker build -t ${{ secrets.DOCKERHUB_USER }}/rating-service:latest ./rating-service
 
       - name: Upload container to Docker Hub with Push
-        run: docker push ${{ secrets.DOCKER_USER }}/rating-service:latest
+        run: docker push ${{ secrets.DOCKERHUB_USER }}/rating-service:latest
