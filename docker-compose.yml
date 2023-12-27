@@ -93,6 +93,28 @@ services:
     networks:
       - default
 
+  api-gateway:
+    depends_on:
+      - actor-service
+      - rating-service
+      - movie-service
+      - cinema-service
+    image: j0ppek/ede-api-gateway:latest
+    ports:
+      - 8084:8084
+    links:
+      - actor-service
+      - rating-service
+      - movie-service
+      - cinema-service
+    environment:
+      ACTOR_SERVICE_BASEURL: localhost:8080
+      RATING_SERVICE_BASEURL: localhost:8081
+      MOVIE_SERVICE_BASEURL: localhost:8082
+      CINEMA_SERVICE_BASEURL: localhost:8083
+    networks:
+      - default
+
 networks:
   default:
     driver: bridge

@@ -1,0 +1,54 @@
+server:
+  port: 8084
+
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator: INFO
+    reactor.netty: TRACE
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENTID}
+            client-secret: ${GOOGLE_CLIENTSECRET}
+            scope: openid,profile,email
+      resourceserver:
+        jwt:
+          issuer-uri: https://accounts.google.com
+          jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
+  cloud:
+  gateway:
+    routes:
+      - id: actor-service
+        uri: http://${ACTOR_SERVICE_BASEURL:localhost:8080}
+        predicates:
+          - Path=/actors
+          - Method=GET
+        filters:
+          - SetPath=/api/actors
+      - id: cinema-service
+        uri: http://${CINEMA_SERVICE_BASEURL:localhost:8080}
+        predicates:
+          - Path=/cinemas
+          - Method=GET
+        filters:
+          - SetPath=/api/cinemas
+      - id: movie-service
+        uri: http://${MOVIE_SERVICE_BASEURL:localhost:8080}
+        predicates:
+          - Path=/movies
+          - Method=GET
+        filters:
+          - SetPath=/api/movies
+      - id: rating-service
+        uri: http://${RATING_SERVICE_BASEURL:localhost:8081}
+        predicates:
+          - Path=/ratings
+          - Method=GET
+        filters:
+          - SetPath=/api/ratings
