@@ -22,6 +22,25 @@ public class MovieController {
         movieRepository.save(movie);
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteMovie(@PathVariable String id) {
+        movieRepository.deleteById(id);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateMovie(@PathVariable String id, @RequestBody Movie movie) {
+        Movie newMovie = Movie.builder()
+            .movieId(id)
+            .title(movie.getTitle())
+            .description(movie.getDescription())
+            .releaseDate(movie.getReleaseDate())
+            .actors(movie.getActors())
+            .build();
+        movieRepository.save(newMovie);
+    }
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Movie> getAllMovies() {

@@ -19,26 +19,26 @@ public class MovieService {
     public void loadData() {
         if (movieRepository.count() <= 0) {
             Movie movie = Movie.builder()
-                .title("Movie 1")
-                .description("Description 1")
-                .releaseDate("2021-01-01")
+                .title("The Lion King")
+                .description("The Lion King is a 2019 American musical drama film directed and produced by Jon Favreau, written by Jeff Nathanson, and produced by Walt Disney Pictures.")
+                .releaseDate("19 July 2019")
                 .actors(List.of(1L, 2L, 3L))
                 .build();
             movieRepository.save(movie);
 
             movie = Movie.builder()
-                .title("Movie 2")
-                .description("Description 2")
-                .releaseDate("2021-01-02")
-                .actors(List.of(1L, 2L))
+                .title("The Joker")
+                .description("Joker is a 2019 American psychological thriller film directed and produced by Todd Phillips, who co-wrote the screenplay with Scott Silver.")
+                .releaseDate("4 October 2019")
+                .actors(List.of(4L, 5L))
                 .build();
             movieRepository.save(movie);
 
             movie = Movie.builder()
-                .title("Movie 3")
-                .description("Description 3")
-                .releaseDate("2021-01-03")
-                .actors(List.of(1L))
+                .title("Avengers: Endgame")
+                .description("Avengers: Endgame is a 2019 American superhero film based on the Marvel Comics superhero team the Avengers.")
+                .releaseDate("26 April 2019")
+                .actors(List.of(6L, 7L, 8L, 9L, 10L))
                 .build();
             movieRepository.save(movie);
         }
@@ -52,6 +52,25 @@ public class MovieService {
             .actors(movie.getActors())
             .build();
         movieRepository.save(newMovie);
+    }
+
+    public void deleteMovie(String movieId) {
+        movieRepository.deleteById(movieId);
+    }
+
+    public void updateMovie(String movieId, Movie movie) {
+        movieRepository.findById(movieId).ifPresentOrElse(
+            m -> {
+                m.setTitle(movie.getTitle());
+                m.setDescription(movie.getDescription());
+                m.setReleaseDate(movie.getReleaseDate());
+                m.setActors(movie.getActors());
+                movieRepository.save(m);
+            },
+            () -> {
+                throw new RuntimeException("Movie not found");
+            }
+        );
     }
 
     public List<MovieResponse> getAllMovies() {
