@@ -1,83 +1,112 @@
-# name: Build and deliver containers
+name: Build and deliver containers
 
-# on: push
+on:
+  push:
+    branches:
+      - "main"
 
-# jobs:
-#   productservice:
-#     runs-on: ubuntu-latest
-#     name: Java 17 build, test, deliver product-service container
-#     steps:
-#       - name: Check out repository
-#         uses: actions/checkout@v3
+jobs:
+  actorservice:
+    runs-on: ubuntu-latest
+    name: Java 17 build, test, deliver actor-service container
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
 
-#       - name: Set up JDK 17
-#         uses: actions/setup-java@v3
-#         with:
-#           java-version: 17
-#           cache: maven
-#           distribution: adopt
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          cache: maven
+          distribution: adopt
       
-#       - name: Build, test and package project
-#         working-directory: ./product-service
-#         run: mvn package -DskipTests
+      - name: Build, test and package project
+        working-directory: ./actor-service
+        run: mvn package -DskipTests
 
-#       - name: Docker login
-#         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Docker login
+        run: docker login -u ${{ secrets.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
-#       - name: Docker Build
-#         run: docker build -t ${{ secrets.DOCKER_USER }}/product-service:latest ./product-service
+      - name: Docker Build
+        run: docker build -t ${{ secrets.DOCKERHUB_USER }}/actor-service:latest ./actor-service
 
-#       - name: Upload container to Docker Hub with Push
-#         run: docker push ${{ secrets.DOCKER_USER }}/product-service:latest
-#   inventoryservice:
-#     runs-on: ubuntu-latest
-#     name: Java 17 build, test, deliver inventory-service container
-#     steps:
-#       - name: Check out repository
-#         uses: actions/checkout@v3
+      - name: Upload container to Docker Hub with Push
+        run: docker push ${{ secrets.DOCKERHUB_USER }}/actor-service:latest
+  cinemaservice:
+    runs-on: ubuntu-latest
+    name: Java 17 build, test, deliver cinema-service container
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
 
-#       - name: Set up JDK 17
-#         uses: actions/setup-java@v3
-#         with:
-#           java-version: 17
-#           cache: maven
-#           distribution: adopt
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          cache: maven
+          distribution: adopt
 
-#       - name: Build, test and package project
-#         working-directory: ./inventory-service
-#         run: mvn package -DskipTests
+      - name: Build, test and package project
+        working-directory: ./cinema-service
+        run: mvn package -DskipTests
 
-#       - name: Docker login
-#         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Docker login
+        run: docker login -u ${{ secrets.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
-#       - name: Docker Build
-#         run: docker build -t ${{ secrets.DOCKER_USER }}/inventory-service:latest ./inventory-service
+      - name: Docker Build
+        run: docker build -t ${{ secrets.DOCKERHUB_USER }}/cinema-service:latest ./cinema-service
 
-#       - name: Upload container to Docker Hub with Push
-#         run: docker push ${{ secrets.DOCKER_USER }}/inventory-service:latest
-#   orderservice:
-#     runs-on: ubuntu-latest
-#     name: Java 17 build, test, deliver order-service container
-#     steps:
-#       - name: Check out repository
-#         uses: actions/checkout@v3
+      - name: Upload container to Docker Hub with Push
+        run: docker push ${{ secrets.DOCKERHUB_USER }}/cinema-service:latest
+  movieservice:
+    runs-on: ubuntu-latest
+    name: Java 17 build, test, deliver movie-service container
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
 
-#       - name: Set up JDK 17
-#         uses: actions/setup-java@v3
-#         with:
-#           java-version: 17
-#           cache: maven
-#           distribution: adopt
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          cache: maven
+          distribution: adopt
         
-#       - name: Build, test and package project
-#         working-directory: ./order-service
-#         run: mvn package -DskipTests
+      - name: Build, test and package project
+        working-directory: ./movie-service
+        run: mvn package -DskipTests
         
-#       - name: Docker login
-#         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Docker login
+        run: docker login -u ${{ secrets.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
-#       - name: Docker Build
-#         run: docker build -t ${{ secrets.DOCKER_USER }}/order-service:latest ./order-service
+      - name: Docker Build
+        run: docker build -t ${{ secrets.DOCKERHUB_USER }}/movie-service:latest ./movie-service
 
-#       - name: Upload container to Docker Hub with Push
-#         run: docker push ${{ secrets.DOCKER_USER }}/order-service:latest
+      - name: Upload container to Docker Hub with Push
+        run: docker push ${{ secrets.DOCKERHUB_USER }}/movie-service:latest
+  ratingservice:
+    runs-on: ubuntu-latest
+    name: Java 17 build, test, deliver rating-service container
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          cache: maven
+          distribution: adopt
+        
+      - name: Build, test and package project
+        working-directory: ./rating-service
+        run: mvn package -DskipTests
+        
+      - name: Docker login
+        run: docker login -u ${{ secrets.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Docker Build
+        run: docker build -t ${{ secrets.DOCKERHUB_USER }}/rating-service:latest ./rating-service
+
+      - name: Upload container to Docker Hub with Push
+        run: docker push ${{ secrets.DOCKERHUB_USER }}/rating-service:latest
