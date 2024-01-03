@@ -21,10 +21,4 @@ public class CinemaController {
     public List<CinemaResponse> getAllCinemas() {
         return cinemaService.getAllCinemas();
     }
-
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public CinemaResponse getCinemaById(@PathVariable String id) {
-        return cinemaService.getCinemaById(id);
-    }
 }

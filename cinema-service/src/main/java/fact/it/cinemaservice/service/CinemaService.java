@@ -38,10 +38,6 @@ public class CinemaService {
         return cinemaRepository.findAll().stream().map(this::mapToResponse).toList();
     }
 
-    public CinemaResponse getCinemaById(String id) {
-        return mapToResponse(cinemaRepository.findById(id).orElse(null));
-    }
-
     private CinemaResponse mapToResponse(Cinema cinema) {
         return CinemaResponse.builder().cinemaId(cinema.getCinemaId()).name(cinema.getName())
                 .address(cinema.getAddress()).movies(cinema.getMovies()).build();

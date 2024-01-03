@@ -16,12 +16,12 @@ public class RatingController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Object findAll() {
-        return ratingService.findAll();
+        return ratingService.getAllRatings();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Object findById(@PathVariable Long id) {
-        return ratingService.findById(id);
+        return ratingService.getRatingById(id);
     }
 }

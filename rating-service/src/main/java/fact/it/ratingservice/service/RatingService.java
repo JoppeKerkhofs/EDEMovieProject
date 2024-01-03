@@ -25,12 +25,12 @@ public class RatingService {
     }
 
     @Transactional
-    public List<Rating> findAll() {
+    public List<Rating> getAllRatings() {
         return ratingRepository.findAll();
     }
 
     @Transactional
-    public Rating findById(Long id) {
+    public Rating getRatingById(Long id) {
         return ratingRepository.findById(id).orElse(null);
     }
 }
