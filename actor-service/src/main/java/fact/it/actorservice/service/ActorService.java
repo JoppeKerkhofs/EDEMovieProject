@@ -50,8 +50,17 @@ public class ActorService {
 
     // a function to update an actor
     @Transactional
-    public Actor updateActor(Actor actor) {
-        return actorRepository.save(actor);
+    public Actor updateActor(Long id, Actor actor) {
+        Actor actorToUpdate = actorRepository.findById(id).orElse(null);
+        if (actorToUpdate != null) {
+            actorToUpdate.setName(actor.getName());
+            actorToUpdate.setBirthDate(actor.getBirthDate());
+            actorToUpdate.setCountry(actor.getCountry());
+            actorToUpdate.setActive(actor.isActive());
+        }
+        // save the updated actor
+        actorRepository.save(actorToUpdate);
+        return actorToUpdate;
     }
 
     // a function to delete an actor

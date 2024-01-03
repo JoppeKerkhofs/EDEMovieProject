@@ -90,9 +90,10 @@ class ActorServiceApplicationTests {
 		actor.setCountry("USA");
 		actor.setActive(true);
 
+		when(actorRepository.findById(1L)).thenReturn(java.util.Optional.of(actor));
 		when(actorRepository.save(actor)).thenReturn(actor);
 
-		Actor actorResponse = actorService.updateActor(actor);
+		Actor actorResponse = actorService.updateActor(1L, actor);
 
 		assertThat(actorResponse.getName()).isEqualTo("Donald Glover");
 	}

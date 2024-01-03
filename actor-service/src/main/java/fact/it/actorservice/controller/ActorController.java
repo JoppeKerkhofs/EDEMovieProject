@@ -33,10 +33,10 @@ public class ActorController {
         return actorService.addActor(actor);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Actor updateActor(@RequestBody Actor actor) {
-        return actorService.updateActor(actor);
+    public Actor updateActor(@PathVariable Long id, @RequestBody Actor actor) {
+        return actorService.updateActor(id, actor);
     }
 
     @DeleteMapping("/{id}")
