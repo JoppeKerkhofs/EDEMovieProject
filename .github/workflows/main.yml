@@ -22,7 +22,7 @@ jobs:
       
       - name: Build, test and package project
         working-directory: ./actor-service
-        run: mvn package -DskipTests
+        run: mvn package -B
 
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB_TOKEN }}
@@ -48,7 +48,7 @@ jobs:
 
       - name: Build, test and package project
         working-directory: ./cinema-service
-        run: mvn package -DskipTests
+        run: mvn package -B
 
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB_TOKEN }}
@@ -74,7 +74,7 @@ jobs:
         
       - name: Build, test and package project
         working-directory: ./movie-service
-        run: mvn package -DskipTests
+        run: mvn package -B
         
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB_TOKEN }}
@@ -100,7 +100,7 @@ jobs:
         
       - name: Build, test and package project
         working-directory: ./rating-service
-        run: mvn package -DskipTests
+        run: mvn package -B
         
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB_TOKEN }}
