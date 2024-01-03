@@ -26,4 +26,22 @@ public class ActorController {
     public Actor findById(@PathVariable Long id) {
         return actorService.findById(id);
     }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Actor addActor(@RequestBody Actor actor) {
+        return actorService.addActor(actor);
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public Actor updateActor(@RequestBody Actor actor) {
+        return actorService.updateActor(actor);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteActor(@PathVariable Long id) {
+        actorService.deleteActor(id);
+    }
 }

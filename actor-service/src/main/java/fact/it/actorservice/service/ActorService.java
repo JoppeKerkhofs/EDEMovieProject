@@ -40,4 +40,22 @@ public class ActorService {
     public Actor findById(Long id) {
         return actorRepository.findById(id).orElse(null);
     }
+
+    // a function to add an actor
+    @Transactional
+    public Actor addActor(Actor actor) {
+        return actorRepository.save(actor);
+    }
+
+    // a function to update an actor
+    @Transactional
+    public Actor updateActor(Actor actor) {
+        return actorRepository.save(actor);
+    }
+
+    // a function to delete an actor
+    @Transactional
+    public void deleteActor(Long id) {
+        actorRepository.deleteById(id);
+    }
 }

@@ -31,6 +31,34 @@ spring:
             - Method=GET
           filters:
             - SetPath=/api/actors
+        - id: actor-service-post
+          uri: http://${ACTOR_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/actors
+            - Method=POST
+          filters:
+            - SetPath=/api/actors
+        - id: actor-service-id
+          uri: http://${ACTOR_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/actors/**
+            - Method=GET
+          filters:
+            - RewritePath=/actors/(?<id>.*), /api/actors/${id}
+        - id: actor-service-delete
+          uri: http://${ACTOR_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/actors/**
+            - Method=DELETE
+          filters:
+            - RewritePath=/actors/(?<id>.*), /api/actors/${id}
+        - id: actor-service-put
+          uri: http://${ACTOR_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/actors/**
+            - Method=PUT
+          filters:
+            - RewritePath=/actors/(?<id>.*), /api/actors/${id}
         - id: cinema-service
           uri: http://${CINEMA_SERVICE_BASEURL:localhost:8080}
           predicates:
