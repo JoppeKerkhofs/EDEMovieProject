@@ -3,6 +3,7 @@ package fact.it.actorservice.service;
 import java.sql.Date;
 import java.util.List;
 import org.springframework.stereotype.Service;
+
 import fact.it.actorservice.model.Actor;
 import fact.it.actorservice.repository.ActorRepository;
 import jakarta.annotation.PostConstruct;
@@ -32,7 +33,7 @@ public class ActorService {
     }
 
     @Transactional
-    public List<Actor> findAll() {
+    public List<Actor> getAllActors() {
         return actorRepository.findAll();
     }
 

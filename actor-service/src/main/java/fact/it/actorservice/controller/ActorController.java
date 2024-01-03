@@ -18,7 +18,7 @@ public class ActorController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Actor> findAll() {
-        return actorService.findAll();
+        return actorService.getAllActors();
     }
 
     @GetMapping("/{id}")
