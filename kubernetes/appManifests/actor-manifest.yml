@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-actors
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: mysql-actors
+  template:
+    metadata:
+      labels:
+        app: mysql-actors
+    spec:
+      containers:
+        - name: mysql-actors
+          image: mysql:latest
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "abc123"
+          ports:
+            - containerPort: 3306
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-actors
+  namespace: default
+spec:
+  selector:
+    app: mysql-actors
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: actor-service
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: actor-service
+  template:
+    metadata:
+      labels:
+        app: actor-service
+    spec:
+      containers:
+        - name: actor-service
+          image: j0ppek/actor-service:latest
+          env:
+            - name: MYSQL_DB_PORT
+              value: "3306"
+            - name: MYSQL_DB_HOST
+              value: "mysql-actors"
+            - name: MYSQL_DB_USERNAME
+              value: "root"
+            - name: MYSQL_DB_PASSWORD
+              value: "abc123"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: actor-service
+  namespace: default
+spec:
+  selector:
+    app: actor-service
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

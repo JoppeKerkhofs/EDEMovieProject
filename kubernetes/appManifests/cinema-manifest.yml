@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-cinemas
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: mongo-cinemas
+  template:
+    metadata:
+      labels:
+        app: mongo-cinemas
+    spec:
+      containers:
+        - name: mongo-cinemas
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-cinemas
+  namespace: default
+spec:
+  selector:
+    app: mongo-cinemas
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cinema-service
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: cinema-service
+  template:
+    metadata:
+      labels:
+        app: cinema-service
+    spec:
+      containers:
+        - name: cinema-service
+          image: j0ppek/cinema-service:latest
+          env:
+            - name: MONGODB_PORT
+              value: "27017"
+            - name: MONGODB_HOST
+              value: "mongo-cinemas"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cinema-service
+  namespace: default
+spec:
+  selector:
+    app: cinema-service
+  ports:
+    - protocol: TCP
+      port: 8083
+      targetPort: 8080

@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-ratings
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: mysql-ratings
+  template:
+    metadata:
+      labels:
+        app: mysql-ratings
+    spec:
+      containers:
+        - name: mysql-ratings
+          image: mysql:latest
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "abc123"
+          ports:
+            - containerPort: 3306
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-ratings
+  namespace: default
+spec:
+  selector:
+    app: mysql-ratings
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rating-service
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: rating-service
+  template:
+    metadata:
+      labels:
+        app: rating-service
+    spec:
+      containers:
+        - name: rating-service
+          image: j0ppek/rating-service:latest
+          env:
+            - name: MYSQL_DB_PORT
+              value: "3306"
+            - name: MYSQL_DB_HOST
+              value: "mysql-ratings"
+            - name: MYSQL_DB_USERNAME
+              value: "root"
+            - name: MYSQL_DB_PASSWORD
+              value: "abc123"
+
+---
+apiVersion: v1 
+kind: Service
+metadata:
+  name: rating-service
+  namespace: default
+spec:
+  selector:
+    app: rating-service
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8081

@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-movies
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: mongo-movies
+  template:
+    metadata:
+      labels:
+        app: mongo-movies
+    spec:
+      containers:
+        - name: mongo-movies
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-movies
+  namespace: default
+spec:
+  selector:
+    app: mongo-movies
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: movie-service
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: movie-service
+  template:
+    metadata:
+      labels:
+        app: movie-service
+    spec:
+      containers:
+        - name: movie-service
+          image: j0ppek/movie-service:latest
+          env:
+            - name: MONGODB_PORT
+              value: "27017"
+            - name: MONGODB_HOST
+              value: "mongo-movies"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: movie-service
+  namespace: default
+spec:
+  selector:
+    app: movie-service
+  ports:
+    - protocol: TCP
+      port: 8082
+      targetPort: 8080
