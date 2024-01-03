@@ -1,7 +1,6 @@
 package fact.it.movieservice.service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.springframework.stereotype.Service;
 
@@ -51,43 +50,12 @@ public class MovieService {
         }
     }
 
-    public void addMovie(Movie movie) {
-        Movie newMovie = Movie.builder()
-            .movieId(movie.getMovieId())
-            .title(movie.getTitle())
-            .description(movie.getDescription())
-            .releaseDate(movie.getReleaseDate())
-            .actors(movie.getActors())
-            .build();
-        movieRepository.save(newMovie);
-    }
-
-    public void deleteMovie(String movieId) {
-        movieRepository.deleteById(movieId);
-    }
-
-    public void updateMovie(String movieId, Movie movie) {
-        movieRepository.findById(movieId).ifPresentOrElse(
-            m -> {
-                m.setTitle(movie.getTitle());
-                m.setDescription(movie.getDescription());
-                m.setReleaseDate(movie.getReleaseDate());
-                m.setActors(movie.getActors());
-                movieRepository.save(m);
-            },
-            () -> {
-                throw new RuntimeException("Movie not found");
-            }
-        );
-    }
-
     public List<MovieResponse> getAllMovies() {
         return movieRepository.findAll().stream().map(this::mapToMovieResponse).toList();
     }
 
-    public MovieResponse getMovieById(String movieId) {
-    return mapToMovieResponse(movieRepository.findById(movieId)
-            .orElseThrow(() -> new NoSuchElementException("Movie not found with ID: " + movieId)));
+    public List<MovieResponse> getMoviesByTitle(String title) {
+        return movieRepository.findByTitle(title).stream().map(this::mapToMovieResponse).toList();
     }
 
     private MovieResponse mapToMovieResponse(Movie movie) {

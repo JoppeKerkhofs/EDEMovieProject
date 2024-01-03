@@ -23,13 +23,13 @@ public class MovieController {
     }
 
     @DeleteMapping("/{movieId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public void deleteMovie(@PathVariable String movieId) {
         movieRepository.deleteById(movieId);
     }
 
     @PutMapping("/{movieId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public void updateMovie(@PathVariable String movieId, @RequestBody Movie movie) {
         Movie newMovie = Movie.builder()
             .movieId(movieId)

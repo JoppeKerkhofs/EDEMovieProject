@@ -10,8 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MovieRequest {
+    private String movieId;
     private String title;
     private String description;
     private String releaseDate;
     private String actors;
+    private int ratingId;
 }
