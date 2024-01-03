@@ -22,17 +22,17 @@ public class MovieController {
         movieRepository.save(movie);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{movieId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteMovie(@PathVariable String id) {
-        movieRepository.deleteById(id);
+    public void deleteMovie(@PathVariable String movieId) {
+        movieRepository.deleteById(movieId);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{movieId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateMovie(@PathVariable String id, @RequestBody Movie movie) {
+    public void updateMovie(@PathVariable String movieId, @RequestBody Movie movie) {
         Movie newMovie = Movie.builder()
-            .movieId(id)
+            .movieId(movieId)
             .title(movie.getTitle())
             .description(movie.getDescription())
             .releaseDate(movie.getReleaseDate())
@@ -48,9 +48,9 @@ public class MovieController {
         return movieRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{movieId}")
     @ResponseStatus(HttpStatus.OK)
-    public Movie getMovieById(@PathVariable String id) {
-        return movieRepository.findById(id).orElseThrow();
+    public Movie getMovieById(@PathVariable String movieId) {
+        return movieRepository.findById(movieId).orElseThrow();
     }
 }

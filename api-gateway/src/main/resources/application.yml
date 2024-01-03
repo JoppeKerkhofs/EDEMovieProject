@@ -51,14 +51,14 @@ spring:
             - Path=/movies/**
             - Method=GET
           filters:
-            - SetPath=/api/movies/{id}
+            - SetPath=/api/movies/{movieId}
         - id: movie-service-delete
           uri: http://${MOVIE_SERVICE_BASEURL:localhost:8080}
           predicates:
             - Path=/movies/**
             - Method=DELETE
           filters:
-            - SetPath=/api/movies/{id}
+            - SetPath=/api/movies/{movieId}
         - id: movie-service-post
           uri: http://${MOVIE_SERVICE_BASEURL:localhost:8080}
           predicates:
@@ -72,7 +72,7 @@ spring:
             - Path=/movies/**
             - Method=PUT
           filters:
-            - SetPath=/api/movies/{id}
+            - SetPath=/api/movies/{movieId}
         - id: rating-service
           uri: http://${RATING_SERVICE_BASEURL:localhost:8081}
           predicates:
