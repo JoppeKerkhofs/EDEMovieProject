@@ -3,9 +3,10 @@ package fact.it.actorservice;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import fact.it.actorservice.model.Actor;
 import fact.it.actorservice.repository.ActorRepository;
@@ -15,8 +16,8 @@ import fact.it.actorservice.service.ActorService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
-class ActorServiceApplicationTests {
+@ExtendWith(MockitoExtension.class)
+public class ActorServiceApplicationTests {
 
 	@InjectMocks
 	private ActorService actorService;
@@ -41,12 +42,12 @@ class ActorServiceApplicationTests {
 		actor2.setActive(true);
 
 		List<Actor> actors = List.of(actor1, actor2);
-		
+	
 		when(actorRepository.findAll()).thenReturn(actors);
 
-		List<Actor> actorResponses = actorService.getAllActors();
+		List<Actor> actorResponse = actorService.getAllActors();
 
-		assertThat(actorResponses.size()).isEqualTo(2);
+		assertThat(actorResponse.size()).isEqualTo(2);
 	}
 
 	@Test
