@@ -83,8 +83,8 @@ public class MovieService {
         return movieRepository.findAll().stream().map(this::mapToMovieResponse).toList();
     }
 
-    public MovieResponse getMovieById(String movieId) {
-        return movieRepository.findById(movieId).map(this::mapToMovieResponse).orElse(null);
+    public Movie getMovieById(String movieId) {
+        return movieRepository.findByMovieId(movieId);
     }
 
     private MovieResponse mapToMovieResponse(Movie movie) {

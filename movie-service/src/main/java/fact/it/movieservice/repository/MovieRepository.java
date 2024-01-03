@@ -6,4 +6,6 @@ import fact.it.movieservice.model.Movie;
 
 public interface MovieRepository extends MongoRepository<Movie, String> {
     List<Movie> findByTitle(String title);
+
+    Movie findByMovieId(String movieId);
 }
