@@ -1,6 +1,7 @@
 package fact.it.movieservice.service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.stereotype.Service;
 
@@ -52,6 +53,7 @@ public class MovieService {
 
     public void addMovie(Movie movie) {
         Movie newMovie = Movie.builder()
+            .movieId(movie.getMovieId())
             .title(movie.getTitle())
             .description(movie.getDescription())
             .releaseDate(movie.getReleaseDate())
@@ -83,8 +85,9 @@ public class MovieService {
         return movieRepository.findAll().stream().map(this::mapToMovieResponse).toList();
     }
 
-    public Movie getMovieById(String movieId) {
-        return movieRepository.findByMovieId(movieId);
+    public MovieResponse getMovieById(String movieId) {
+    return mapToMovieResponse(movieRepository.findById(movieId)
+            .orElseThrow(() -> new NoSuchElementException("Movie not found with ID: " + movieId)));
     }
 
     private MovieResponse mapToMovieResponse(Movie movie) {
