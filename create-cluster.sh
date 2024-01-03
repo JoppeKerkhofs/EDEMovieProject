@@ -61,10 +61,10 @@ kubectl wait --for=condition=available deployment/rating-service --timeout=120s
 echo "${green}kubectl wait --for=condition=available deployment/api-gateway --timeout=120s${reset}"
 kubectl wait --for=condition=available deployment/api-gateway --timeout=120s
 
-echo "${magenta}---------------- Open Minikube Dashboard ----------------${reset}"
-# Open Minikube Dashboard
-echo "${green}minikube dashboard${reset}"
-minikube dashboard
+# echo "${magenta}---------------- Open Minikube Dashboard ----------------${reset}"
+# # Open Minikube Dashboard
+# echo "${green}minikube dashboard${reset}"
+# minikube dashboard
 
 # echo "${magenta}---------------- Open the Prometheus service in the browser ----------------${reset}"
 # # Open the Prometheus service in the browser
@@ -75,3 +75,8 @@ minikube dashboard
 # # Open the Grafana service in the browser
 # echo "${green}minikube service grafana -n monitoring${reset}"
 # minikube service grafana -n monitoring
+
+echo "${magenta}---------------- Open the API Gateway service in the browser ----------------${reset}"
+# Open the API Gateway service in the browser
+echo "${green}kubectl port-forward service/api-gateway 8084:8084${reset}"
+kubectl port-forward service/api-gateway 8084:8084
