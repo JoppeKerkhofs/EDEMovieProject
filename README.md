@@ -267,14 +267,17 @@ spec:
 ```
 
 ### Minikube dashboard
-This is the dashboard of minikube, here you can see all the pods, services, deployments, ... that are running in the default namespace of the cluster.
-The pods, services, deployments of the Prometheus and Grafana are running in the monitoring namespace.
+Dit is het dashboard van Minikube, hier ziet u alle pods, services, deployments, ... die in de default namespace van de cluster worden uitgevoerd.
+De pods, services, deployments van Prometheus en Grafana worden uitgevoerd in het monitoring namespace.
 <img src="/images/minikubeDashboard-defaultNamespace.png" alt="minikube dashboard"/>
 
 ### Prometheus example
-This is the Prometheus dashboard.
+Dit is het Prometheus dashboard.
 <img src="/images/prometheusDashboard.png" alt="prometheus dashboard"/>
 
 ### Grafana example
-This is the Grafana dashboard.
+Dit is het Grafana dashboard.
 <img src="/images/grafanaDashboard.png" alt="grafana dashboard"/>
+
+## Hosting
+Deze applicatie is niet gehost omdat Octato geen free accounts meer laat aanmaken. Alles draait lokaal in docker desktop.
