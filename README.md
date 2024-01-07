@@ -169,12 +169,23 @@ spring:
           filters:
             - SetPath=/api/ratings
 ```
-Hier volgen de 4 GET calls
-De POST op actors
-De PUT op actors
-De DELETE op actors
+### Hier volgen de 4 GET calls
+<img src="/images/ActorsGet.png" alt="get actors"/>
+<img src="/images/CinemasGet.png" alt="get cinemas"/>
+<img src="/images/MoviesGet.png" alt="get movies"/>
+<img src="/images/RatingsGet.png" alt="get ratings"/>
+
+#### De POST op actors
+<img src="/images/ActorsPost.png" alt="post actors"/>
+
+#### De PUT op actors
+<img src="/images/ActorsPut.png" alt="put actors"/>
+
+#### De DELETE op actors
+<img src="/images/ActorsDelete.png" alt="delete actors"/>
 
 ## Deployment Diagram
+<img src="/images/movieProject.png" alt="deployment diagram"/>
 
 ## Kubernetes
 Wij hebben gekozen om een uitbreiding te doen met kubernetes, Prometheus en Grafana, hiervoor gebruiken we minikube en kubectl. De manifest files zijn opgedeeld per microservice en zijn database. Wij hebben ook een script geschreven om de cluster op te starten, in dit script worden alle manifest files geladen. Ook de uitbreiding met Prometheus en Grafana staan hier. Nu volgt de manifest file van movie-service.
@@ -251,5 +262,16 @@ spec:
       port: 8082
       targetPort: 8080
 ```
+
+### Minikube dashboard
+This is the dashboard of minikube, here you can see all the pods, services, deployments, ... that are running in the default namespace of the cluster.
+The pods, services, deployments of the Prometheus and Grafana are running in the monitoring namespace.
+<img src="/images/minikubeDashboard-defaultNamespace.png" alt="minikube dashboard"/>
+
 ### Prometheus example
+This is the Prometheus dashboard.
+<img src="/images/prometheusDashboard.png" alt="prometheus dashboard"/>
+
 ### Grafana example
+This is the Grafana dashboard.
+<img src="/images/grafanaDashboard.png" alt="grafana dashboard"/>
