@@ -178,6 +178,9 @@ spring:
 #### De POST op actors
 <img src="/images/ActorsPost.png" alt="post actors"/>
 
+#### De POST op movies
+<img src="/images/MoviesPost.png" alt="post movies"/>
+
 #### De PUT op actors
 <img src="/images/ActorsPut.png" alt="put actors"/>
 
