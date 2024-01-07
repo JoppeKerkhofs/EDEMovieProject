@@ -275,3 +275,6 @@ Dit is het Prometheus dashboard.
 ### Grafana example
 Dit is het Grafana dashboard.
 <img src="/images/grafanaDashboard.png" alt="grafana dashboard"/>
+
+## Hosting
+Deze applicatie is niet gehost omdat Octato geen free accounts meer laat aanmaken. Alles draait lokaal in docker desktop.
